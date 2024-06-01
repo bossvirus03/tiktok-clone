@@ -10,13 +10,17 @@ import Feed from "./pages/Feed.tsx";
 import ProtectedRoutes from "./components/ProtectedRoutes.tsx";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./utils/apolloClient.ts";
+import MainLayout from "./layouts/MainLayout.tsx";
+import UploadLayout from "./layouts/UploadLayout.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <ProtectedRoutes>
-        <Feed />
+        <MainLayout>
+          <Feed />
+        </MainLayout>
       </ProtectedRoutes>
     ),
   },
@@ -24,7 +28,9 @@ const router = createBrowserRouter([
     path: "/upload",
     element: (
       <ProtectedRoutes>
-        <Upload />
+        <UploadLayout>
+          <Upload />
+        </UploadLayout>
       </ProtectedRoutes>
     ),
   },

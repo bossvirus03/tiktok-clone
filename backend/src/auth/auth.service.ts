@@ -8,14 +8,10 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Request, Response } from 'express';
 import { PrismaService } from 'src/prisma.service';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import duration from 'dayjs/plugin/duration';
-import { User } from 'src/user/entities/user.entity';
+import { User } from 'src/user/models/user.model';
 import { LoginDto, RegisterDto } from './auth.dto';
 
-dayjs.extend(utc);
-dayjs.extend(duration);
+
 
 @Injectable()
 export class AuthService {
@@ -49,12 +45,19 @@ export class AuthService {
 
     const days = parseInt(expiresIn.replace('d', ''), 10);
 
-    const nowUTC = dayjs().utc();
+    const nowUTC = new Date();
 
-    const futureUTC = nowUTC.add(dayjs.duration({ days: days }));
-
-    futureUTC.format();
-    const expiration = nowUTC + futureUTC.format();
+    // Function to add days to a Date object
+    function addDays(date: Date, days: number): Date {
+      const result = new Date(date);
+      result.setUTCDate(result.getUTCDate() + days);
+      return result;
+    }
+    
+    const futureUTC = addDays(nowUTC, days);
+    
+    // Format the future date as a string (ISO format)
+    const expiration = futureUTC.toISOString();
     const accessToken = this.jwtService.sign(
       { ...payload, exp: expiration },
       {
@@ -140,8 +143,6 @@ export class AuthService {
   async logout(response: Response) {
     response.clearCookie('access_token');
     response.clearCookie('refresh_token');
-    return {
-      message: 'Logged out successfully!',
-    };
+    return 'Logged out successfully!';
   }
 }

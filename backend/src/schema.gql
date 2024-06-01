@@ -12,6 +12,12 @@ type ErrorType {
   message: String!
 }
 
+type Like {
+  id: Int!
+  postId: Int!
+  userId: Int!
+}
+
 input LoginDto {
   email: String!
   password: String!
@@ -23,13 +29,38 @@ type LoginResponse {
 }
 
 type Mutation {
+  createPost(text: String!, video: Upload!): Post!
+  deletePost(id: Float!): Post!
   login(loginInput: LoginDto!): LoginResponse!
   logout: String!
   refresh: String!
   register(registerInput: RegisterDto!): RegisterResponse!
 }
 
+type Post {
+  createdAt: DateTime!
+  id: Int!
+  likes: [Like!]
+  text: String!
+  user: User!
+  video: String!
+}
+
+type PostDetails {
+  createdAt: DateTime!
+  id: Int!
+  likes: [Like!]
+  otherPostIds: [Float!]
+  text: String!
+  user: User!
+  video: String!
+}
+
 type Query {
+  getPostById(id: Float!): PostDetails!
+  getPosts(skip: Int! = 0, take: Int! = 1): [Post!]!
+  getPostsByUserId(userId: Float!): [Post!]!
+  getUsers: [User!]!
   hello: String!
 }
 
@@ -44,6 +75,9 @@ type RegisterResponse {
   error: ErrorType
   user: User
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 type User {
   bio: String

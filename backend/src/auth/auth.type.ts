@@ -1,5 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { User } from 'src/user/entities/user.entity';
+import { User } from 'src/user/models/user.model';
 @ObjectType()
 export class ErrorType {
   @Field()
@@ -11,7 +11,7 @@ export class ErrorType {
 
 @ObjectType()
 export class RegisterResponse {
-  @Field(() => User, { nullable: true }) // Assuming User is another ObjectType you have
+  @Field(() => User, { nullable: true })
   user?: User;
 
   @Field(() => ErrorType, { nullable: true })

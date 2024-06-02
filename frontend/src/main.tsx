@@ -17,11 +17,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ProtectedRoutes>
-        <MainLayout>
+      <MainLayout>
+        <ProtectedRoutes>
           <Feed />
-        </MainLayout>
-      </ProtectedRoutes>
+        </ProtectedRoutes>
+      </MainLayout>
     ),
   },
   {
@@ -46,8 +46,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <RouterProvider router={router} />
       <App />
+      <RouterProvider router={router} />
     </ApolloProvider>
   </React.StrictMode>
 );

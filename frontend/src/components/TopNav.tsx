@@ -123,27 +123,29 @@ function TopNav() {
                     alt="mini-avatar"
                   />
                 </button>
-                <div
-                  id="PopupMenu"
-                  className="absolute bg-white rounded-lg py-1.5 w-[200px] shadow-xl border top-[43px] -right-2"
-                >
-                  <Link
-                    to={`/profile/${user.id}`}
-                    className="flex items-center px-3 py-2 hover:bg-gray-100 "
+                {showMenu && (
+                  <div
+                    id="PopupMenu"
+                    className="absolute bg-white rounded-lg py-1.5 w-[200px] shadow-xl border top-[43px] -right-2"
                   >
-                    <BsFillPersonFill size={20} color="#161725" />
-                    <span className="font-semibold text-sm">Profile</span>
-                  </Link>
-                  {user.id && (
-                    <div
-                      onClick={handleLogout}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
+                    <Link
+                      to={`/profile/${user.id}`}
+                      className="flex items-center px-3 py-2 hover:bg-gray-100 "
                     >
-                      <GrLogout size={20} color="#161725" />
-                      <span className="font-semibold text-sm">Log out</span>
-                    </div>
-                  )}
-                </div>
+                      <BsFillPersonFill size={20} color="#161725" />
+                      <span className="font-semibold text-sm">Profile</span>
+                    </Link>
+                    {user.id && (
+                      <div
+                        onClick={handleLogout}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
+                      >
+                        <GrLogout size={20} color="#161725" />
+                        <span className="font-semibold text-sm">Log out</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>

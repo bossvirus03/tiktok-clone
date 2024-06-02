@@ -13,8 +13,8 @@ import { GraphQLErrorFilter } from 'src/filters/custom-exception.filter';
 @Resolver('Post')
 export class PostResolver {
   constructor(private readonly postService: PostService) {}
-  @UseFilters(GraphQLErrorFilter)
   @UseGuards(GraphqlAuthGuard)
+  @UseFilters(GraphQLErrorFilter)
   @Mutation(() => Post)
   async createPost(
     @Context() context: { req: Request },

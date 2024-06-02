@@ -19,6 +19,7 @@
     "apollo-upload-client": "^18.0.1",
     "graphql": "^16.8.1",
     "react": "^18.2.0",
+    "react-cropper": "^2.3.3",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.1",
